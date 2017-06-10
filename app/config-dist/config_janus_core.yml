@@ -1,7 +1,7 @@
 janus_service_registry_core:
     admin:
-        name: 'JANUS admin'
-        email: janusadmin@example.org
+        name: 'Tim van Dijen'
+        email: tvdijen@gmail.com
 
     # Auth source used to gain access to JANUS
     auth: admin
@@ -41,8 +41,8 @@ janus_service_registry_core:
 #    push:
 #       remote:
 #           test:
-#               name: "Requestb.in test service ( http://requestb.in/uexm0cue )"
-#               url: "http://requestb.in/uexm0cue"
+#               name: "OpenConext EngineBlock"
+#               url: "https://janus:janus_password@{{ engine_api_domain }}/api/connections"
 #       # Disable SSL verification for test environments (should not be on in prod!)
 #       requestOptions:
 #           verify: false
@@ -52,57 +52,16 @@ janus_service_registry_core:
         testaccepted:
             name:
                 en: Test
-                da: Test
-                es: 'testaccepted - es'
             description:
                 en: 'All test should be performed in this state'
-                da: 'I denne tilstand skal al test foretages'
-                es: 'Desc 1 es'
             isDeployable: true
             textColor: red
             abbr: 'TA'
-        QApending:
-            name:
-                en: 'Pending QA'
-                da: 'Afventer QA'
-                es: 'QApending - es'
-            description:
-                en: 'Move the connection to QA. The operations team will check that all conditions for entering QA are met.'
-                da: 'Flyt forbindelsen til QA. Driften vil kontrollerer at forbindelsen overholder alle betingelser før forbindelsen flyttes til QA'
-                es: 'Desc 2 es'
-            isDeployable: true
-            abbr: 'QP'
-        QAaccepted:
-            name:
-                en: QA
-                da: QA
-                es: 'QAaccepted - es'
-            description:
-                en: 'The connection is on the QA system.'
-                da: 'Forbindelsen er på QA systemet.'
-                es: 'Desc 3 es'
-            isDeployable: true
-            abbr: 'QA'
-        prodpending:
-            name:
-                en: 'Pending Production'
-                da: 'Afventer Produktion'
-                es: 'prodpending - es'
-            description:
-                en: 'Move the connection to Production. The operations team will check that all conditions for entering Production are met.'
-                da: 'Flyt forbindelsen til Produktion. Driften vil kontrollerer at forbindelsen overholder alle betingelser før forbindelsen flyttes til Produktion'
-                es: 'Desc 4 es'
-            isDeployable: true
-            abbr: 'PP'
         prodaccepted:
             name:
                 en: Production
-                da: Produktion
-                es: 'prodaccepted - es'
             description:
                 en: 'The connection is on the Production system'
-                da: 'Forbindelsen er på Produktions systemet'
-                es: 'Desc 5 es'
             isDeployable: true
             textColor: green
             abbr: 'PA'
@@ -815,27 +774,18 @@ janus_service_registry_core:
         changeentitytype:
             default: false
             workflow_states:
-                testaccepted:
-                    - all
+                all:
+                    - admin
         exportmetadata:
             default: false
             workflow_states:
-                testaccepted:
-                    - all
-                QAaccepted:
-                    - secretariat
-                    - operations
-                prodaccepted:
-                    - secretariat
-                    - operations
+                all:
+                    - admin
         blockremoteentity:
             default: false
             workflow_states:
-                testaccepted:
-                    - all
-                QAaccepted:
-                    - technical
-                    - secretariat
+                all:
+                    - admin
         changeworkflow:
             default: true
         changeentityid:
@@ -843,23 +793,23 @@ janus_service_registry_core:
         addmetadata:
             default: false
             workflow_states:
-                testaccepted:
-                    - all
+                all:
+                    - admin
         deletemetadata:
             default: false
             workflow_states:
-                testaccepted:
-                    - all
+                all:
+                    - admin
         modifymetadata:
             default: false
             workflow_states:
-                testaccepted:
-                    - all
+                all:
+                    - admin
         importmetadata:
             default: false
             workflow_states:
-                testaccepted:
-                    - all
+                all:
+                    - admin
         validatemetadata:
             default: true
         changemanipulation:
@@ -869,10 +819,8 @@ janus_service_registry_core:
         disableconsent:
             default: false
             workflow_states:
-                testaccepted:
-                    - all
-                QAaccepted:
-                    - technical
+                all:
+                    - admin
         createnewentity:
             workflow_states:
                 all:
@@ -880,41 +828,31 @@ janus_service_registry_core:
         showsubscriptions:
             workflow_states:
                 all:
-                    - secretariat
-                    - operations
+                    - admin
         addsubscriptions:
             workflow_states:
                 all:
-                    - secretariat
-                    - operations
+                    - admin
         editsubscriptions:
             workflow_states:
                 all:
-                    - secretariat
-                    - operations
+                    - admin
         deletesubscriptions:
             workflow_states:
                 all:
-                    - secretariat
-                    - operations
+                    - admin
         exportallentities:
             workflow_states:
                 all:
-                    - operations
                     - admin
-                    - secretariat
         arpeditor:
             workflow_states:
                 all:
-                    - operations
                     - admin
-                    - secretariat
         federationtab:
             workflow_states:
                 all:
-                    - operations
                     - admin
-                    - secretariat
         admintab:
             workflow_states:
                 all:
@@ -930,51 +868,17 @@ janus_service_registry_core:
         experimental:
             workflow_states:
                 all:
-                    - experimental
+                    - admin
 
     # CA bundle used for checking,
     # by default check for path used by ca-certificates package
     ca_bundle_file: /etc/pki/tls/certs/ca-bundle.crt
     workflow:
         testaccepted:
-            QApending:
-                role:
-                    - technical
-                    - secretariat
-        QApending:
-            QAaccepted:
-                role:
-                    - secretariat
-            testaccepted:
-                role:
-                    - operations
-                    - technical
-                    - secretariat
-        QAaccepted:
-            testaccepted:
-                role:
-                    - operations
-                    - technical
-                    - secretariat
-            prodpending:
-                role:
-                    - operations
-        prodpending:
             prodaccepted:
                 role:
-                    - secretariat
-            testaccepted:
-                role:
-                    - operations
-                    - technical
-                    - secretariat
+                    - admin
         prodaccepted:
             testaccepted:
                 role:
-                    - operations
-                    - technical
-                    - secretariat
-            QApending:
-                role:
-                    - operations
-                    - secretariat
+                    - admin
