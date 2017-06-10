@@ -20,7 +20,7 @@ janus_service_registry_core:
 
     entity:
         # Metadata field used as pretty name for entities
-        prettyname: 'name:en'
+        prettyname: 'name:nl'
 
         # JANUS supports a blacklist (mark idps that are not allowed to connect to an sp)
         # and/or a whitelist (mark idps that are allowed to connect to an sp).
@@ -52,16 +52,20 @@ janus_service_registry_core:
         testaccepted:
             name:
                 en: Test
+                nl: Test
             description:
                 en: 'All test should be performed in this state'
+                nl: 'Alle tests zouden in deze stasnd moeten worden uitgevoerd'
             isDeployable: true
             textColor: red
             abbr: 'TA'
         prodaccepted:
             name:
                 en: Production
+                nl: Productie
             description:
                 en: 'The connection is on the Production system'
+                nl: 'Deze verbinding is in productie'
             isDeployable: true
             textColor: green
             abbr: 'PA'
