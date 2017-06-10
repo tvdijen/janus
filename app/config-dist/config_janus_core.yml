@@ -755,16 +755,16 @@ janus_service_registry_core:
             maxDuration: 432000 #Maximum 5 days duration on ValidUntil.
             sign:
                 # Whether metadata should be signed
-                enable: false
+                enable: true
 
                 # Private key which should be used when signing the metadata
-                privatekey: server.pem
+                privatekey: /etc/openconext/signing.openconext.moo-archive.nl.key
 
                 # Password to decrypt private key, or NULL if the private key is unencrypted
                 privatekey_pass: null
 
                 # Certificate which should be included in the signature. Should correspond to the private key
-                certificate: server.crt
+                certificate: /etc/openconext/signing.openconext.moo-archive.nl.crt
 
     # Access configuration of JANUS.
     #
